@@ -2,35 +2,34 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Attendance;
 use Illuminate\Database\Seeder;
-
+use Illuminate\Support\Facades\DB;
 
 class AttendanceSeeder extends Seeder
 {
     public function run()
     {
-        Attendance::truncate(); // Kosongkan tabel attendance dulu (opsional)
+        $statusOptions = ['hadir', 'izin', 'sakit', 'alfa'];
 
-        Attendance::insert([
-            [
-                'user_id' => 1,
-                'date' => '2025-05-01',
-                'status' => 'hadir',
-                'description' => 'Hadir tepat waktu',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'user_id' => 1,
-                'date' => '2025-05-02',
-                'status' => 'izin',
-                'description' => 'Ada keperluan keluarga',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-        ]);
+        $users = User::with('courseTakens')->get();
 
-        echo "Data attendance berhasil disisipkan.\n";
+        foreach ($users as $user) {
+            foreach ($user->courseTakens as $course) {
+                for ($i = 1; $i <= 14; $i++) {
+                    Attendance::create([
+                        'npm' => $user->npm,
+                        'date' => now()->addWeeks($i)->toDateString(),
+                        'status' => $statusOptions[array_rand($statusOptions)],
+                        'description' => 'Pertemuan ke-' . $i,
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+            }
+        }
+
+        echo "Seeder: AttendanceSeeder selesai.\n";
     }
 }

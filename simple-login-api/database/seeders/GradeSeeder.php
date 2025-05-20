@@ -2,47 +2,41 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\Grade;
 use App\Models\User;
+use App\Models\Grade;
+use Illuminate\Database\Seeder;
 
 class GradeSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        // Ambil user pertama (pastikan user ada di DB)
-        $user = User::first();
-
-        if (!$user) {
-            $this->command->warn('Tidak ada user ditemukan. Seeder Grade tidak dijalankan.');
-            return;
-        }
-
-        $grades = [
-            [
-                'user_id' => $user->id,
-                'subject_name' => 'Matematika Diskrit',
-                'grade' => 'A',
-                'grade_point' => 4.0,
-                'sks' => 3,
-            ],
-            [
-                'user_id' => $user->id,
-                'subject_name' => 'Algoritma dan Struktur Data',
-                'grade' => 'B+',
-                'grade_point' => 3.5,
-                'sks' => 3,
-            ],
-
+        $gradeOptions = [
+            ['grade' => 'A', 'point' => 4.0],
+            ['grade' => 'B+', 'point' => 3.5],
+            ['grade' => 'B', 'point' => 3.0],
+            ['grade' => 'C+', 'point' => 2.5],
+            ['grade' => 'C', 'point' => 2.0],
         ];
 
-        foreach ($grades as $grade) {
-            Grade::create($grade);
+        $users = User::with('courseTakens')->get(); // ✅ perbaikan di sini
+
+        foreach ($users as $user) {
+            foreach ($user->courseTakens as $course) { // ✅ perbaikan di sini
+                $grade = $gradeOptions[array_rand($gradeOptions)];
+
+                Grade::create([
+                    'npm' => $user->npm,
+                    'subject_name' => $course->course_name,
+                    'grade' => $grade['grade'],
+                    'grade_point' => $grade['point'],
+                    'sks' => $course->sks,
+                    'semester_id' => null, // atau hilangkan jika kolom ini sudah dihapus
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
         }
 
-        $this->command->info('Data grade berhasil disisipkan.');
+        $this->command->info('Data grade berhasil disisipkan untuk semua user.');
     }
 }

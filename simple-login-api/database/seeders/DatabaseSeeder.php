@@ -20,10 +20,10 @@ public function run(): void
 {
     $this->call([
         UserSeeder::class,
-        GradeSeeder::class,
         SemesterSeeder::class,
-        AttendanceSeeder::class,
         CourseTakenSeeder::class,
+        GradeSeeder::class,
+        AttendanceSeeder::class,
     ]);
 }
 }

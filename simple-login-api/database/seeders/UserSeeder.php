@@ -6,24 +6,46 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Faker\Factory as Faker;
 
 class UserSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('users')->delete();
+        // Nonaktifkan foreign key constraint sementara
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-        User::insert([
-            [
-                'name' => 'Eko Aryanto',
-                'email' => 'ekoa@mail.com',
-                'password' => Hash::make('Password123#'),
-                'role' => 'admin',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+        // Truncate tabel users
+        User::truncate();
+
+        // Aktifkan kembali foreign key constraint
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        // Pengguna tetap
+        User::create([
+            'name' => 'Eko Aryanto',
+            'email' => 'ekoa@mail.com',
+            'password' => Hash::make('Password123#'),
+            'role' => 'admin',
+            'npm' => '202501010001',
         ]);
 
-        echo "Data user berhasil disisipkan.\n";
+        // Pengguna acak
+        $faker = Faker::create();
+        for ($i = 2; $i <= 10; $i++) {
+            $day = str_pad(rand(1, 28), 2, '0', STR_PAD_LEFT);
+            $month = str_pad(rand(1, 12), 2, '0', STR_PAD_LEFT);
+            $npm = '2025' . $month . $day . str_pad($i, 4, '0', STR_PAD_LEFT);
+
+            User::create([
+                'name' => $faker->name,
+                'email' => $faker->unique()->safeEmail,
+                'password' => Hash::make('Password123#'),
+                'role' => 'student',
+                'npm' => $npm,
+            ]);
+        }
+
+        echo "Seeder: UserSeeder selesai.\n";
     }
 }

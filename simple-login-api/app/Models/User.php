@@ -11,42 +11,24 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'role',
-    ];
-
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
-    public function grade()
+public function grade()
 {
-    return $this->hasOne(Grade::class);
+    return $this->hasMany(Grade::class, 'npm', 'npm');
 }
 
 public function semester()
 {
-    return $this->hasOne(Semester::class);
+    return $this->hasMany(Semester::class, 'npm', 'npm');
 }
 
 public function attendance()
 {
-    return $this->hasOne(Attendance::class);
+    return $this->hasMany(Attendance::class, 'npm', 'npm');
 }
 
-public function courseTaken()
+public function courseTakens()
 {
-    return $this->hasOne(CourseTaken::class);
+    return $this->hasMany(CourseTaken::class, 'npm', 'npm');
 }
+
 }

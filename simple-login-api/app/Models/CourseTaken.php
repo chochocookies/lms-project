@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CourseTaken extends Model
 {
-    use HasFactory;
+    protected $fillable = ['npm', 'course_name', 'sks', 'semester'];
 
-    protected $fillable = ['user_id', 'course_name', 'sks', 'semester'];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

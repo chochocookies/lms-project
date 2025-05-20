@@ -1,32 +1,36 @@
 <?php
 
-
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
+use App\Models\User;
 use App\Models\Semester;
-
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class SemesterSeeder extends Seeder
 {
     public function run()
     {
-        Semester::truncate(); // kosongkan tabel dulu (optional)
+        $users = User::all();
 
-        Semester::create([
-            'user_id' => 1,
-            'name' => 'Semester 1',
-            'start_date' => '2024-09-01',
-            'end_date' => '2025-01-15',
-        ]);
+        foreach ($users as $user) {
+            for ($i = 1; $i <= 8; $i++) {
+                $startYear = 2024 + floor(($i - 1) / 2);
+                $startMonth = ($i % 2 == 1) ? '09' : '02';
+                $startDate = $startYear . '-' . $startMonth . '-01';
+                $endDate = date('Y-m-d', strtotime("+5 months", strtotime($startDate)));
 
-        Semester::create([
-            'user_id' => 1,
-            'name' => 'Semester 2',
-            'start_date' => '2025-02-01',
-            'end_date' => '2025-06-15',
-        ]);
+                Semester::create([
+                    'npm' => $user->npm,
+                    'name' => 'Semester ' . $i,
+                    'start_date' => $startDate,
+                    'end_date' => $endDate,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
 
-        echo "Data semester berhasil disisipkan.\n";
+        echo "Seeder: SemesterSeeder selesai.\n";
     }
 }

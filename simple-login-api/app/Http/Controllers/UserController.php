@@ -12,16 +12,8 @@ class UserController extends Controller
             'grade', 'semester', 'attendance', 'courseTaken'
         ]);
 
-        return response()->json([
-            'user' => [
-                'id' => $user->id,
-                'name' => $user->name,
-                'photo' => $user->photo,
-                'gpa' => $user->grade->gpa ?? null,
-                'semester' => $user->semester->name ?? null,
-                'attendance' => $user->attendance->percentage ?? null,
-                'credits' => $user->courseTaken->credits ?? null,
-            ]
-        ]);
+            return response()->json([
+        'user' => $user
+    ]);
     }
 }

@@ -8,13 +8,17 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('semesters', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('name'); // contoh: Semester 1, Semester Ganjil 2023/2024
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->timestamps();
-        });
+        $table->id();
+        $table->string('npm', 12); // FK ke users.npm
+        $table->string('name');
+        $table->date('start_date');
+        $table->date('end_date');
+        $table->timestamps();
+
+        $table->foreign('npm')->references('npm')->on('users')->onDelete('cascade');
+    });
+
+
     }
 
     public function down(): void
