@@ -16,48 +16,46 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->headers->set('Accept', 'application/json');
-        // Log input mentah untuk debug
-        Log::info('Raw input:', ['raw' => file_get_contents('php://input')]);
         Log::info('Register attempt:', $request->all());
 
         try {
-        // Validasi
-        $validator = Validator::make($request->all(), [
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|string|email|unique:users',
-            'password' => 'required|string|confirmed|min:8',
-            'role'     => 'required|string|in:user,admin'
-        ]);
+            $validator = Validator::make($request->all(), [
+                'name'     => 'required|string|max:255',
+                'email'    => 'required|string|email|unique:users',
+                'password' => 'required|string|confirmed|min:8',
+                'role'     => 'required|string|in:student,admin'
+            ]);
 
-        if ($validator->fails()) {
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Validasi gagal',
+                    'errors' => $validator->errors(),
+                ], 422);
+            }
+
+            $user = User::create([
+                'name'     => $request->name,
+                'email'    => $request->email,
+                'password' => Hash::make($request->password),
+                'role'     => $request->role,
+                // 'npm' dibuat otomatis di model
+            ]);
+
+            $token = $user->createToken('auth_token')->plainTextToken;
+
             return response()->json([
-                'message' => 'Validasi gagal',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
+                'message' => 'Registrasi berhasil',
+                'access_token' => $token,
+                'token_type' => 'Bearer',
+                'user' => $user,
+            ], 201);
+        } catch (\Exception $e) {
+            Log::error('Register error: ' . $e->getMessage());
 
-        $user = User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'password' => Hash::make($request->password),
-            'role'     => $request->role,
-        ]);
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json([
-            'message' => 'Registrasi berhasil',
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-            'user' => $user,
-        ], 201);
-    } catch (\Exception $e) {
-        Log::error('Register error: ' . $e->getMessage());
-
-        return response()->json([
-            'message' => 'Terjadi kesalahan saat registrasi.',
-            'error' => $e->getMessage()
-        ], 500);
+            return response()->json([
+                'message' => 'Terjadi kesalahan saat registrasi.',
+                'error' => $e->getMessage(),
+            ], 500);
     }
     }
 
@@ -76,8 +74,12 @@ class AuthController extends Controller
             ], 401);
         }
 
+        // --- Perbaikan di sini: Eager load relasi ---
+        $user->load(['grade', 'semester', 'attendance', 'courseTaken']);
+        // ---------------------------------------------
+
         // Opsional: login secara manual
-        Auth::login($user);
+        // Auth::login($user); // Baris ini sebenarnya tidak perlu untuk API Stateless (Sanctum)
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -85,28 +87,26 @@ class AuthController extends Controller
             'message' => 'Login berhasil',
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'user' => $user,
+            'user' => $user, // Sekarang $user akan berisi data relasional lengkap
         ]);
     }
 
-    // Logout
-    public function logout(Request $request)
-    {
-        $request->user()->tokens()->delete();
-
-        return response()->json(['message' => 'Logout berhasil']);
-    }
+    // ... logout method ...
 
     // Profile
-        public function profile(Request $request)
+    // Method profile sudah benar dalam eager loading
+    public function profile(Request $request)
     {
         $user = $request->user()->load([
-            'grade', 'semester', 'attendance', 'courseTaken'
+            'grade',
+            'semester',
+            'attendance',
+            'courseTaken'
         ]);
 
-            return response()->json([
-        'user' => $user
-    ]);
+        return response()->json([
+            'user' => $user
+        ]);
     }
 }
 

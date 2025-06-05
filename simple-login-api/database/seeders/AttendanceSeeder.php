@@ -11,12 +11,12 @@ class AttendanceSeeder extends Seeder
 {
     public function run()
     {
-        $statusOptions = ['hadir', 'izin', 'sakit', 'alfa'];
+        $statusOptions = ['Hadir', 'Alfa'];
 
-        $users = User::with('courseTakens')->get();
+        $users = User::with('courseTaken')->get();
 
         foreach ($users as $user) {
-            foreach ($user->courseTakens as $course) {
+            foreach ($user->courseTaken as $course) {
                 for ($i = 1; $i <= 14; $i++) {
                     Attendance::create([
                         'npm' => $user->npm,

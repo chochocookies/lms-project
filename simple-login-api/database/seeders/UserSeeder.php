@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
         // Pengguna tetap
         User::create([
             'name' => 'Eko Aryanto',
-            'email' => 'ekoa@mail.com',
+            'email' => 'eko@mail.com',
             'password' => Hash::make('Password123#'),
             'role' => 'admin',
             'npm' => '202501010001',

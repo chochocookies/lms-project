@@ -18,10 +18,10 @@ class GradeSeeder extends Seeder
             ['grade' => 'C', 'point' => 2.0],
         ];
 
-        $users = User::with('courseTakens')->get(); // ✅ perbaikan di sini
+        $users = User::with('courseTaken')->get(); // ✅ perbaikan di sini
 
         foreach ($users as $user) {
-            foreach ($user->courseTakens as $course) { // ✅ perbaikan di sini
+            foreach ($user->courseTaken as $course) { // ✅ perbaikan di sini
                 $grade = $gradeOptions[array_rand($gradeOptions)];
 
                 Grade::create([

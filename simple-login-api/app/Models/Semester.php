@@ -15,6 +15,6 @@ class Semester extends Model
 
     public function grades()
     {
-        return $this->hasMany(Grade::class, 'semester_id');
+        return $this->hasMany(Grade::class, 'semester_id', 'id');
     }
 }

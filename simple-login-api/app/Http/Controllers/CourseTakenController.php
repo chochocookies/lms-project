@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\CourseTaken;
+use Illuminate\Http\Request;
 
 class CourseTakenController extends Controller
 {
     public function index()
     {
+        User::with(['grade', 'semester', 'attendance', 'courseTaken'])->get();
         return CourseTaken::with('user')->get();
     }
 
