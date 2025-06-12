@@ -1,61 +1,98 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Login App With Panel Admin 
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A simple Flutter application with Firebase integration for authentication features.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **User Login**: Login with a username and password.
+- **Registration**: Register using an email address.
+- **Google Login**: Authenticate users via Google Sign-In.
+- **Forgot Password**: Reset forgotten passwords via email.
+- **Email Verification**: Verify user email addresses through Firebase.
+- **Password Validation**: Ensure strong and unique passwords by enforcing length and complexity.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Getting Started
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+This project serves as a starting point for building Flutter applications with Firebase integration.
 
-## Learning Laravel
+### Prerequisites
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Install Flutter SDK: [Flutter Installation Guide](https://flutter.dev/docs/get-started/install)
+2. Set up Firebase project: [Firebase Console](https://console.firebase.google.com/)
+3. Add your Android app to Firebase: [Firebase Setup Guide](https://firebase.google.com/docs/android/setup)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Installation Steps
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/chochocookies/simple-login-app
+   cd login_app
+   ```
 
-## Laravel Sponsors
+2. Install dependencies:
+   ```bash
+   flutter pub get
+   ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+3. Configure Firebase:
+   - Download `google-services.json` from your Firebase project.
+   - Place the file in the `android/app` directory.
 
-### Premium Partners
+4. Run the application:
+   ```bash
+   flutter run
+   ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+---
 
-## Contributing
+# Aplikasi Login deangan DAshboard Admin 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Aplikasi Flutter sederhana dengan integrasi Firebase untuk fitur autentikasi.
 
-## Code of Conduct
+## Fitur
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **Login Pengguna**: Login menggunakan nama pengguna dan kata sandi.
+- **Registrasi**: Daftar menggunakan alamat email.
+- **Login Google**: Autentikasi pengguna melalui Google Sign-In.
+- **Lupa Kata Sandi**: Atur ulang kata sandi yang terlupa melalui email.
+- **Verifikasi Email**: Verifikasi alamat email pengguna melalui Firebase.
+- **Validasi Kata Sandi**: Memastikan kata sandi yang kuat dan unik dengan menerapkan panjang dan kompleksitas tertentu.
 
-## Security Vulnerabilities
+## Memulai
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Proyek ini merupakan titik awal untuk membangun aplikasi Flutter dengan integrasi Firebase.
 
-## License
+### Prasyarat
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. Instal Flutter SDK: [Panduan Instalasi Flutter](https://flutter.dev/docs/get-started/install)
+2. Siapkan proyek Firebase: [Konsol Firebase](https://console.firebase.google.com/)
+3. Tambahkan aplikasi Android Anda ke Firebase: [Panduan Penyiapan Firebase](https://firebase.google.com/docs/android/setup)
+
+### Langkah Instalasi
+
+1. Kloning repositori:
+   ```bash
+   git clone https://github.com/chochocookies/simple-login-app
+   cd login_app
+   ```
+
+2. Instal dependensi:
+   ```bash
+   flutter pub get
+   ```
+
+3. Konfigurasi Firebase:
+   - Unduh `google-services.json` dari proyek Firebase Anda.
+   - Tempatkan file tersebut di direktori `android/app`.
+
+4. Jalankan aplikasi:
+   ```bash
+   flutter run
+   ```
+
+
+## Project Preview
+
+Below is a visual preview of the Login App project:
+
+![Project Screenshot](assets/Screenshot_20250611_183037.png) ![Project Screenshot](assets/Screenshot_20250611_183123.png)

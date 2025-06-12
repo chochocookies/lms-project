@@ -51,7 +51,6 @@ class CourseTakenSeeder extends Seeder
 
         foreach ($users as $user) {
             for ($semester = 1; $semester <= 8; $semester++) {
-                // Cari semester milik user berdasarkan nama (misal: "Semester 1")
                 $semesterRecord = Semester::where('npm', $user->npm)
                 ->where('name', 'Semester ' . $semester)
                 ->first();

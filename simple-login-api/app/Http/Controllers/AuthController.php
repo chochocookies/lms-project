@@ -74,12 +74,7 @@ class AuthController extends Controller
             ], 401);
         }
 
-        // --- Perbaikan di sini: Eager load relasi ---
         $user->load(['grade', 'semester', 'attendance', 'courseTaken']);
-        // ---------------------------------------------
-
-        // Opsional: login secara manual
-        // Auth::login($user); // Baris ini sebenarnya tidak perlu untuk API Stateless (Sanctum)
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -87,14 +82,12 @@ class AuthController extends Controller
             'message' => 'Login berhasil',
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'user' => $user, // Sekarang $user akan berisi data relasional lengkap
+            'user' => $user,
         ]);
     }
 
-    // ... logout method ...
+    //logout method
 
-    // Profile
-    // Method profile sudah benar dalam eager loading
     public function profile(Request $request)
     {
         $user = $request->user()->load([

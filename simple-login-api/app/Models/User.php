@@ -93,7 +93,7 @@ class User extends Authenticatable
         });
     }
 
-    // === RELATIONS ===
+    // Relasi
 
     public function grade()
     {
@@ -115,7 +115,7 @@ class User extends Authenticatable
         return $this->hasMany(CourseTaken::class, 'npm', 'npm');
     }
 
-    // === ROLE CHECKS ===
+    // Role
 
     public function isAdmin()
     {

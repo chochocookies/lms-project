@@ -18,10 +18,10 @@ class GradeSeeder extends Seeder
             ['grade' => 'C', 'point' => 2.0],
         ];
 
-        $users = User::with('courseTaken')->get(); // ✅ perbaikan di sini
+        $users = User::with('courseTaken')->get();
 
         foreach ($users as $user) {
-            foreach ($user->courseTaken as $course) { // ✅ perbaikan di sini
+            foreach ($user->courseTaken as $course) {
                 $grade = $gradeOptions[array_rand($gradeOptions)];
 
                 Grade::create([
@@ -30,7 +30,7 @@ class GradeSeeder extends Seeder
                     'grade' => $grade['grade'],
                     'grade_point' => $grade['point'],
                     'sks' => $course->sks,
-                    'semester_id' => null, // atau hilangkan jika kolom ini sudah dihapus
+                    'semester_id' => null,
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
