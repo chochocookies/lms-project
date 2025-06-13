@@ -25,8 +25,8 @@ This project serves as a starting point for building Flutter applications with F
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/chochocookies/simple-login-app
-   cd login_app
+   git clone https://github.com/chochocookies/lms-project.git
+   cd simple-login-app
    ```
 
 2. Install dependencies:
@@ -72,8 +72,8 @@ Proyek ini merupakan titik awal untuk membangun aplikasi Flutter dengan integras
 
 1. Kloning repositori:
    ```bash
-   git clone https://github.com/chochocookies/simple-login-app
-   cd login_app
+   git clone https://github.com/chochocookies/lms-project.git
+   cd simple-login-app
    ```
 
 2. Instal dependensi:
@@ -96,3 +96,6 @@ Proyek ini merupakan titik awal untuk membangun aplikasi Flutter dengan integras
 Below is a visual preview of the Login App project:
 
 ![Project Screenshot](assets/Screenshot_20250611_183037.png) ![Project Screenshot](assets/Screenshot_20250611_183123.png)
+
+## Project Full Access
+https://drive.google.com/file/d/17g9PGCbSwYmM63b95kvYJ_CaJQCPHgWQ/view?usp=drive_link
